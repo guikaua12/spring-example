@@ -8,13 +8,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Instant;
 
 @Data
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
 @Entity(name="se_users")
-public class User {
+public class User implements Serializable {
+    @Serial private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private final Long id;
