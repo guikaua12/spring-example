@@ -1,18 +1,19 @@
 package me.approximations.springExample.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+
+@EqualsAndHashCode(exclude={"orders"})
+@Getter
+@Setter
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
 @Entity(name="se_users")
@@ -27,4 +28,16 @@ public class User implements Serializable {
     private String phone;
     private String password;
     private final Instant createdAt;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="client")
+    private final List<Order> orders = new ArrayList<>();
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public void removeOrder(Order order) {
+        orders.remove(order);
+    }
 }
