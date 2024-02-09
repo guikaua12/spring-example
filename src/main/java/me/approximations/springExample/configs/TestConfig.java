@@ -26,11 +26,14 @@ public class TestConfig implements CommandLineRunner {
     }
 
     private void seedDatabase() {
-        final User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456", Instant.now());
-        final User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456", Instant.now());
+        User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456", Instant.now());
+        User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456", Instant.now());
 
         final Order o1 = new Order(null, Instant.now(), OrderStatus.PAID, u1);
         final Order o2 = new Order(null, Instant.now(), OrderStatus.WAITING_PAYMENT, u2);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
 
         userRepository.saveAll(List.of(u1, u2));
         orderRepository.saveAll(List.of(o1, o2));
