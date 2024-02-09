@@ -1,20 +1,25 @@
 package me.approximations.springExample.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude="products")
 @Entity(name="se_categories")
 public class Category {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private final Long id;
     private String name;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="categories")
+    private final Set<Product> products = new LinkedHashSet<>();
 }
