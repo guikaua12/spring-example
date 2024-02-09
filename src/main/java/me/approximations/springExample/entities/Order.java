@@ -1,9 +1,9 @@
 package me.approximations.springExample.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import me.approximations.springExample.entities.enums.OrderStatus;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,8 +20,28 @@ public class Order implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private final Long id;
     private final Instant moment;
+    @JsonIgnore
+    @Getter(value=AccessLevel.NONE)
+    private Integer orderStatusCode;
 
     @ManyToOne
     @JoinColumn(name="client_id")
     private final User client;
+
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
+        this.id = id;
+        this.moment = moment;
+        this.orderStatusCode = orderStatus.getCode();
+        this.client = client;
+    }
+
+    public OrderStatus getOrderStatus() {
+        if (orderStatusCode == null) return null;
+
+        return OrderStatus.valueOf(orderStatusCode);
+    }
+
+    public void setOrderStatus(OrderStatus status) {
+        this.orderStatusCode = status.getCode();
+    }
 }
