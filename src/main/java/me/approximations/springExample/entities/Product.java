@@ -10,10 +10,11 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
-@EqualsAndHashCode(exclude="categories")
+@EqualsAndHashCode(onlyExplicitlyIncluded=true)
 @ToString
 @Entity(name="se_products")
 public class Product {
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private final Long id;

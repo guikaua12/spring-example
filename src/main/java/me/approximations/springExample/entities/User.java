@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@EqualsAndHashCode(exclude={"orders"})
+@EqualsAndHashCode(onlyExplicitlyIncluded=true)
 @Getter
 @Setter
 @NoArgsConstructor(force=true)
@@ -20,6 +20,7 @@ import java.util.List;
 public class User implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private final Long id;
