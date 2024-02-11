@@ -5,17 +5,19 @@ import jakarta.persistence.*;
 import lombok.*;
 import me.approximations.springExample.entities.enums.OrderStatus;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded=true)
+@ToString
 @NoArgsConstructor(force=true)
-@RequiredArgsConstructor
 @Entity(name="se_orders")
 public class Order implements Serializable {
-    @Serial private static final long serialVersionUID = 1L;
-
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private final Long id;
@@ -27,6 +29,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name="client_id")
     private final User client;
+
+    @OneToMany(mappedBy="id.order")
+    private final Set<OrderItem> orderItems = new HashSet<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
         this.id = id;
