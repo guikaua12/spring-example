@@ -3,6 +3,7 @@ package me.approximations.springExample.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.io.Serializable;
@@ -12,7 +13,8 @@ import java.util.Objects;
 @NoArgsConstructor(force=true)
 @EqualsAndHashCode(onlyExplicitlyIncluded=true)
 @ToString
-@Entity(name="se_order_item")
+@Entity
+@Table(name="se_order_item")
 public class OrderItem implements Serializable {
     @EqualsAndHashCode.Include
     @Getter(value=AccessLevel.NONE)

@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded=true)
 @ToString
-@Entity(name="se_products")
+@Entity
+@Table(name="se_products")
 public class Product {
     @EqualsAndHashCode.Include
     @Id

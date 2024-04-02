@@ -16,7 +16,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
-@Entity(name="se_users")
+@Entity
+@Table(name="se_users")
 public class User implements Serializable {
     @Serial private static final long serialVersionUID = 1L;
 

@@ -15,7 +15,8 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded=true)
 @ToString
 @NoArgsConstructor(force=true)
-@Entity(name="se_orders")
+@Entity
+@Table(name="se_orders")
 public class Order implements Serializable {
     @EqualsAndHashCode.Include
     @Id

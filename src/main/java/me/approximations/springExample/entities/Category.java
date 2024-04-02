@@ -12,7 +12,8 @@ import java.util.Set;
 @NoArgsConstructor(force=true)
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded=true)
-@Entity(name="se_categories")
+@Entity
+@Table(name="se_categories")
 public class Category {
     @EqualsAndHashCode.Include
     @Id
