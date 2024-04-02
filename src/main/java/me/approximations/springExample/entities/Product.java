@@ -1,10 +1,12 @@
 package me.approximations.springExample.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -26,4 +28,14 @@ public class Product {
     @ManyToMany
     @JoinTable(name="se_product_category", joinColumns=@JoinColumn(name="product_id"), inverseJoinColumns=@JoinColumn(name="category_id"))
     private final Set<Category> categories = new LinkedHashSet<>();
+
+    @JsonIgnore
+    @Getter(AccessLevel.NONE)
+    @OneToMany(mappedBy="id.product")
+    private final Set<OrderItem> orderItems = new LinkedHashSet<>();
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        return orderItems.stream().map(OrderItem::getOrder).collect(Collectors.toSet());
+    }
 }
