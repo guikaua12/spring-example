@@ -17,6 +17,18 @@ import java.util.Set;
 @NoArgsConstructor(force=true)
 @Entity
 @Table(name="se_orders")
+@NamedEntityGraph(name="order-entity-graph",
+        attributeNodes={
+                @NamedAttributeNode("client"),
+                @NamedAttributeNode(value="items", subgraph="items-subgraph"),
+                @NamedAttributeNode("payment"),
+        },
+        subgraphs={
+                @NamedSubgraph(name="items-subgraph", attributeNodes={
+                        @NamedAttributeNode(value="id"),
+                })
+        }
+)
 public class Order implements Serializable {
     @EqualsAndHashCode.Include
     @Id
