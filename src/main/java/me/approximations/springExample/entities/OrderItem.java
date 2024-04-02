@@ -1,5 +1,6 @@
 package me.approximations.springExample.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -28,6 +29,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         Objects.requireNonNull(this.id, "OrderItem id is null");
 
