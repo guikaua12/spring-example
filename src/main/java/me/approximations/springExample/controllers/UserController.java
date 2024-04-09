@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,9 +26,7 @@ public class UserController {
 
     @RequestMapping(value="/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
-        final Optional<User> userOptional = userService.findById(id);
-
-        return ResponseEntity.ok(userOptional.get());
+        return ResponseEntity.ok(userService.findById(id));
 //        return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

@@ -2,11 +2,11 @@ package me.approximations.springExample.services;
 
 import lombok.RequiredArgsConstructor;
 import me.approximations.springExample.entities.Order;
+import me.approximations.springExample.exceptions.NotFoundException;
 import me.approximations.springExample.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,13 +18,7 @@ public class OrderService {
     }
 
     public Order findById(Long id) {
-        final Optional<Order> orderOptional = orderRepository.findByIdCustom(id);
-
-        if (orderOptional.isEmpty()) {
-            throw new RuntimeException("Order not found");
-        }
-
-        return orderOptional.get();
+        return orderRepository.findByIdCustom(id).orElseThrow(() -> new NotFoundException("Order with id " + id + " not found."));
     }
 
 }

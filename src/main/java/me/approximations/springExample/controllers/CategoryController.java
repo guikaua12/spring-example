@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,8 +26,6 @@ public class CategoryController {
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<Category> findById(@PathVariable Long id) {
-        final Optional<Category> categoryOptional = categoryService.findById(id);
-
-        return ResponseEntity.ok(categoryOptional.get());
+        return ResponseEntity.ok(categoryService.findById(id));
     }
 }
