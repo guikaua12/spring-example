@@ -17,14 +17,14 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Optional<Order> findById(Long id) {
+    public Order findById(Long id) {
         final Optional<Order> orderOptional = orderRepository.findById(id);
 
         if (orderOptional.isEmpty()) {
             throw new RuntimeException("Order not found");
         }
 
-        return orderOptional;
+        return orderOptional.get();
     }
 
 }

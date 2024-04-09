@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,12 +24,8 @@ public class OrderController {
 
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<Order> findById(@PathVariable Long id) {
-        final Optional<Order> orderOptional = orderService.findById(id);
+        final Order order = orderService.findById(id);
 
-        if (orderOptional.isEmpty()) {
-            throw new RuntimeException("Order not found.");
-        }
-        
-        return ResponseEntity.ok(orderOptional.get());
+        return ResponseEntity.ok(order);
     }
 }
