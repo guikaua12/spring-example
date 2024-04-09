@@ -14,10 +14,10 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public List<Product> findAll() {
-        return productRepository.findAll();
+        return productRepository.findAllCustom();
     }
 
     public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+        return productRepository.findByIdCustom(id);
     }
 }

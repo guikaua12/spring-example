@@ -16,9 +16,7 @@ import java.util.stream.Collectors;
 @ToString
 @Entity
 @Table(name="se_products")
-@NamedEntityGraph(name="product-categories", attributeNodes={
-        @NamedAttributeNode("categories")
-})
+
 public class Product {
     @EqualsAndHashCode.Include
     @Id
@@ -29,7 +27,7 @@ public class Product {
     private final Double price;
     private final String imageUrl;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name="se_product_category", joinColumns=@JoinColumn(name="product_id"), inverseJoinColumns=@JoinColumn(name="category_id"))
     private final Set<Category> categories = new LinkedHashSet<>();
 
