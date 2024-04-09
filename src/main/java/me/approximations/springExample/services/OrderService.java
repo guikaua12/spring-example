@@ -14,11 +14,11 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public List<Order> findAll() {
-        return orderRepository.findAll();
+        return orderRepository.findAllCustom();
     }
 
     public Order findById(Long id) {
-        final Optional<Order> orderOptional = orderRepository.findById(id);
+        final Optional<Order> orderOptional = orderRepository.findByIdCustom(id);
 
         if (orderOptional.isEmpty()) {
             throw new RuntimeException("Order not found");

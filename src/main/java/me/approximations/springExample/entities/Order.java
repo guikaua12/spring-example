@@ -17,18 +17,6 @@ import java.util.Set;
 @NoArgsConstructor(force=true)
 @Entity
 @Table(name="se_orders")
-@NamedEntityGraph(name="order-entity-graph",
-        attributeNodes={
-                @NamedAttributeNode("client"),
-                @NamedAttributeNode(value="items", subgraph="items-subgraph"),
-                @NamedAttributeNode("payment"),
-        },
-        subgraphs={
-                @NamedSubgraph(name="items-subgraph", attributeNodes={
-                        @NamedAttributeNode(value="id"),
-                })
-        }
-)
 public class Order implements Serializable {
     @EqualsAndHashCode.Include
     @Id
@@ -45,7 +33,7 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy="id.order")
     private final Set<OrderItem> items = new HashSet<>();
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="order", cascade=CascadeType.ALL)
     private Payment payment;
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
