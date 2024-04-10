@@ -1,6 +1,7 @@
 package me.approximations.springExample.services;
 
 import lombok.RequiredArgsConstructor;
+import me.approximations.springExample.dtos.CreateCategoryDTO;
 import me.approximations.springExample.entities.Category;
 import me.approximations.springExample.exceptions.NotFoundException;
 import me.approximations.springExample.repositories.CategoryRepository;
@@ -19,5 +20,9 @@ public class CategoryService {
 
     public Category findById(Long id) {
         return categoryRepository.findById(id).orElseThrow(() -> new NotFoundException("Category with id " + id + " not found."));
+    }
+
+    public Category create(CreateCategoryDTO dto) {
+        return categoryRepository.save(new Category(null, dto.name()));
     }
 }

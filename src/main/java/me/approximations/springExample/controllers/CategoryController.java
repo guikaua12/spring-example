@@ -1,13 +1,12 @@
 package me.approximations.springExample.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import me.approximations.springExample.dtos.CreateCategoryDTO;
 import me.approximations.springExample.entities.Category;
 import me.approximations.springExample.services.CategoryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,10 @@ public class CategoryController {
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
     public ResponseEntity<Category> findById(@PathVariable Long id) {
         return ResponseEntity.ok(categoryService.findById(id));
+    }
+
+    @RequestMapping(method=RequestMethod.POST)
+    public ResponseEntity<Category> create(@Valid @RequestBody CreateCategoryDTO dto) {
+        return ResponseEntity.status(404).body(categoryService.create(dto));
     }
 }
